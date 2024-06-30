@@ -5,11 +5,11 @@ dependencyResolutionManagement {
     }
 
     versionCatalogs {
-        create("libs"){
+        create("libs") {
             from(files("../gradle/libs.versions.toml"))
         }
     }
 }
 
 rootProject.name = "build-logic"
-include(":conention")
+include(":convention")
