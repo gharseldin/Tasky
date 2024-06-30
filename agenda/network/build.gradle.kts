@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.gharseldin.agenda.data"
+    namespace = "com.gharseldin.agenda.network"
     compileSdk = 34
 
     defaultConfig {
@@ -40,9 +40,4 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    implementation(projects.agenda.domain)
-    implementation(projects.core.domain)
-    implementation(projects.core.data)
-    implementation(projects.core.database)
 }
