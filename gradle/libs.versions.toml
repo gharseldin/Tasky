@@ -15,6 +15,7 @@ ksp = "1.9.22-1.0.17"
 room = "2.6.1"
 androidTools = "31.2.2"
 desugar_jdk_libs = "2.0.4"
+composeCompiler = "1.5.1"
 
 # Project versions
 projectApplicationId = "com.gharseldin.tasky"
@@ -58,4 +59,5 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 
 tasky-android-application = { id = "tasky.android.application", version = "unspecified" }
+tasky-android-application-compose = { id = "tasky.android.application.compose", version = "unspecified" }
 
