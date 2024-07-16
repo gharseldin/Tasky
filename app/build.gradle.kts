@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.tasky.android.application.compose)
+    alias(libs.plugins.tasky.jvm.ktor)
 }
 
 android {
