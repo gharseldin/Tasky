@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.tasky.android.library)
+    alias(libs.plugins.tasky.jvm.ktor)
 }
 
 android {
@@ -7,6 +8,8 @@ android {
 }
 
 dependencies {
+
+    implementation(projects.core.domain)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
