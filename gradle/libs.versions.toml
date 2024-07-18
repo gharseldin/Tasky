@@ -30,6 +30,7 @@ projectVersionCode = "1"
 uiAndroid = "1.6.8"
 lifecycleRuntimeAndroid = "2.8.3"
 material3Android = "1.2.1"
+uiTooling = "1.6.8"
 
 
 [libraries]
@@ -79,6 +80,7 @@ room-gradlePlugin = { group = "androidx.room", name = "room-gradle-plugin", vers
 androidx-ui-android = { group = "androidx.compose.ui", name = "ui-android", version.ref = "uiAndroid" }
 androidx-lifecycle-runtime-android = { group = "androidx.lifecycle", name = "lifecycle-runtime-android", version.ref = "lifecycleRuntimeAndroid" }
 androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
+ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "uiTooling" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
