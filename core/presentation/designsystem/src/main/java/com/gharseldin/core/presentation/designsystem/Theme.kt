@@ -18,7 +18,8 @@ val DarkColorScheme = darkColorScheme(
     onPrimary = TaskyWhite,
     onBackground = TaskyWhite,
     onSurface = TaskyWhite,
-    onSurfaceVariant = TaskyGray
+    onSurfaceVariant = TaskyGray,
+    error = TaskyError
 )
 
 

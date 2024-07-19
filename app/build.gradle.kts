@@ -29,7 +29,14 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation(project(":core:presentation:designsystem"))
+    implementation(libs.androidx.navigation.compose)
+
+    // Koin
+    implementation(libs.bundles.koin)
+
+    // Timber
+    implementation(libs.timber)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -37,4 +44,9 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation(projects.core.presentation.designsystem)
+    implementation(projects.authentication.presentation)
+    implementation(projects.authentication.domain)
+    implementation(projects.authentication.data)
 }

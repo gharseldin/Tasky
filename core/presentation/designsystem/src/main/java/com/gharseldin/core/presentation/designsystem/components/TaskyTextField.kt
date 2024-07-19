@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.input.KeyboardType
@@ -37,6 +38,7 @@ import com.gharseldin.core.presentation.designsystem.TaskyTheme
 fun TaskyTextField(
     state: TextFieldState,
     endIcon: ImageVector?,
+    endIconTint: Color = MaterialTheme.colorScheme.onSurfaceVariant,
     hint: String,
     modifier: Modifier = Modifier,
     keyboardType: KeyboardType = KeyboardType.Text,
@@ -80,8 +82,8 @@ fun TaskyTextField(
                     Icon(
                         imageVector = icon,
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.padding(8.dp)
+                        tint = endIconTint,
+                        modifier = Modifier.padding(horizontal = 8.dp)
                     )
                 }
             }
