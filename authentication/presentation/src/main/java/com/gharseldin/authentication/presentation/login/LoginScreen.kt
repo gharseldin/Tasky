@@ -110,6 +110,7 @@ fun LoginScreen(
             TaskyPasswordField(
                 state = state.password,
                 isPasswordVisible = state.isPasswordVisible,
+                onPasswordFieldFocusChange = {},
                 onTogglePasswordVisibility = {
                     onAction(AuthenticationAction.OnTogglePasswordVisibilityClick)
                 },

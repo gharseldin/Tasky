@@ -4,12 +4,14 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,11 +25,13 @@ import androidx.compose.ui.unit.dp
 import com.gharseldin.authentication.domain.PasswordValidationState
 import com.gharseldin.authentication.presentation.R
 import com.gharseldin.core.presentation.designsystem.CheckIcon
+import com.gharseldin.core.presentation.designsystem.CrossIcon
 import com.gharseldin.core.presentation.designsystem.TaskyGreen
 import com.gharseldin.core.presentation.designsystem.TaskyTheme
 import com.gharseldin.core.presentation.designsystem.components.TaskyActionButton
 import com.gharseldin.core.presentation.designsystem.components.TaskyPasswordField
 import com.gharseldin.core.presentation.designsystem.components.TaskyTextField
+import com.gharseldin.core.presentation.ui.UiText
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -43,6 +47,9 @@ fun RegistrationScreenRoot(
             RegistrationAction.OnBackClicked -> onBackClicked()
             RegistrationAction.OnGetStartedClicked -> TODO()
             RegistrationAction.OnTogglePasswordVisibilityClicked -> TODO()
+            is RegistrationAction.onPasswordFieldFocusChange -> {
+                registrationScreenViewModel.passwordFieldFocusChanged(action.isFocused)
+            }
         }
     }
 }
@@ -113,6 +120,13 @@ private fun RegistrationScreen(
             TaskyPasswordField(
                 state = state.password,
                 isPasswordVisible = state.isPasswordVisible,
+                onPasswordFieldFocusChange = {
+                    onAction(
+                        RegistrationAction.onPasswordFieldFocusChange(
+                            it
+                        )
+                    )
+                },
                 onTogglePasswordVisibility = {
                     onAction(RegistrationAction.OnTogglePasswordVisibilityClicked)
                 },
@@ -120,57 +134,72 @@ private fun RegistrationScreen(
                 modifier = Modifier.fillMaxWidth(),
             )
             Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = stringResource(R.string.password_is_at_least_9_characters_long),
-                modifier = Modifier.padding(start = 20.dp),
-                style = MaterialTheme.typography.bodyMedium,
-                color = if (state.passwordValidationState.hasMinLength) {
-                    TaskyGreen
-                } else {
-                    MaterialTheme.colorScheme.error
-                }
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = stringResource(R.string.password_must_contain_a_digit),
-                modifier = Modifier.padding(start = 20.dp),
-                style = MaterialTheme.typography.bodyMedium,
-                color = if (state.passwordValidationState.hasNumber) {
-                    TaskyGreen
-                } else {
-                    MaterialTheme.colorScheme.error
-                }
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = stringResource(R.string.password_must_contain_a_lowercase_letter),
-                modifier = Modifier.padding(start = 20.dp),
-                style = MaterialTheme.typography.bodyMedium,
-                color = if (state.passwordValidationState.hasLowerCaseCharacter) {
-                    TaskyGreen
-                } else {
-                    MaterialTheme.colorScheme.error
-                }
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = stringResource(R.string.password_must_contain_an_uppercase_letter),
-                modifier = Modifier.padding(start = 20.dp),
-                style = MaterialTheme.typography.bodyMedium,
-                color = if (state.passwordValidationState.hasUpperCaseCharacter) {
-                    TaskyGreen
-                } else {
-                    MaterialTheme.colorScheme.error
-                }
-            )
+            if (state.isPasswordFieldFocused) {
+                PasswordValidationBlock(state = state.passwordValidationState)
+            }
             Spacer(modifier = Modifier.height(24.dp))
             TaskyActionButton(text = stringResource(R.string.get_started), isLoading = false) {
             }
-
         }
     }
 }
 
+@Composable
+fun PasswordValidationBlock(
+    modifier: Modifier = Modifier,
+    state: PasswordValidationState
+) {
+    validationItem(
+        validationCriteria = R.string.password_is_at_least_9_characters_long,
+        validationState = state.hasMinLength
+    )
+    Spacer(modifier = Modifier.height(8.dp))
+    validationItem(
+        validationCriteria = R.string.password_must_contain_a_digit,
+        validationState = state.hasNumber
+    )
+    Spacer(modifier = Modifier.height(8.dp))
+    validationItem(
+        validationCriteria = R.string.password_must_contain_a_lowercase_letter,
+        validationState = state.hasLowerCaseCharacter
+    )
+    Spacer(modifier = Modifier.height(8.dp))
+    validationItem(
+        validationCriteria = R.string.password_must_contain_an_uppercase_letter,
+        validationState = state.hasUpperCaseCharacter
+    )
+}
+
+@Composable
+fun validationItem(
+    validationCriteria: Int,
+    validationState: Boolean
+) {
+    Row {
+        Icon(
+            modifier = Modifier
+                .padding(start = 20.dp),
+            imageVector = if (validationState) {
+                CheckIcon
+            } else {
+                CrossIcon
+            },
+            contentDescription = UiText.StringResource(validationCriteria).toString(),
+            tint = if (validationState) {
+                TaskyGreen
+            } else {
+                MaterialTheme.colorScheme.error
+            }
+
+        )
+        Text(
+            text = stringResource(validationCriteria),
+            modifier = Modifier.padding(start = 20.dp),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+    }
+}
 
 @Preview
 @Composable

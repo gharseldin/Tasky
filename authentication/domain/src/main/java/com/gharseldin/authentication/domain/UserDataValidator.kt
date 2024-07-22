@@ -13,7 +13,7 @@ class UserDataValidator(
 
     private fun countCharacters(text: String): Int {
         var count = 0
-        for (c in text) if (!c.isWhitespace()) count++
+        for (c in text) if (!c.isLetter()) count++
         return count
     }
 

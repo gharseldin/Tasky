@@ -72,6 +72,12 @@ val Typography = Typography(
         fontWeight = FontWeight.W400,
         fontSize = 16.sp,
         lineHeight = 30.sp
+    ),
+    bodySmall = TextStyle(
+        fontFamily = Inter,
+        fontWeight = FontWeight.W300,
+        fontSize = 14.sp,
+        lineHeight = 24.sp
     )
 
     // TODO get the exact values from Figma during implementation of the ui

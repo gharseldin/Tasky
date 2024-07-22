@@ -52,4 +52,10 @@ class RegistrationScreenViewModel(
             )
         }.launchIn(viewModelScope)
     }
+
+    fun passwordFieldFocusChanged(isFocused: Boolean) {
+        state = state.copy(
+            isPasswordFieldFocused = isFocused
+        )
+    }
 }

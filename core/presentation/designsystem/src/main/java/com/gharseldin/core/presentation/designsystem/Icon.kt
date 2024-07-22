@@ -39,3 +39,8 @@ val RadioCheckedIcon: ImageVector
 val RadioUncheckedIcon: ImageVector
     @Composable
     get() = ImageVector.vectorResource(id = R.drawable.radio_unchecked)
+
+val CrossIcon: ImageVector
+    @Composable
+    get() = ImageVector.vectorResource(id = R.drawable.cross)
+

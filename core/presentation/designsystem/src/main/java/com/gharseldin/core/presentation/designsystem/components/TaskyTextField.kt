@@ -52,7 +52,7 @@ fun TaskyTextField(
             keyboardType = keyboardType
         ),
         lineLimits = TextFieldLineLimits.SingleLine,
-        cursorBrush = SolidColor(MaterialTheme.colorScheme.onBackground),
+        cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
         modifier = Modifier
             .clip(RoundedCornerShape(10.dp))
             .background(TaskyLight2)
