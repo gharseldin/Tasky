@@ -50,7 +50,7 @@ fun LoginScreenRoot(
         onAction = {
             when (it) {
                 AuthenticationAction.onLoginClick -> TODO()
-                AuthenticationAction.onSignUpClick -> TODO()
+                AuthenticationAction.onSignUpClick -> onSignUpClick()
                 AuthenticationAction.OnTogglePasswordVisibilityClick -> TODO()
             }
         }
@@ -102,7 +102,7 @@ fun LoginScreen(
                 } else {
                     null
                 },
-                hint = "Email address",
+                hint = stringResource(R.string.email_address),
                 modifier = Modifier.fillMaxWidth(),
                 keyboardType = KeyboardType.Email
             )
@@ -110,14 +110,15 @@ fun LoginScreen(
             TaskyPasswordField(
                 state = state.password,
                 isPasswordVisible = state.isPasswordVisible,
+                onPasswordFieldFocusChange = {},
                 onTogglePasswordVisibility = {
                     onAction(AuthenticationAction.OnTogglePasswordVisibilityClick)
                 },
-                hint = "Password",
+                hint = stringResource(R.string.password),
                 modifier = Modifier.fillMaxWidth(),
             )
             Spacer(modifier = Modifier.height(24.dp))
-            TaskyActionButton(text = "LOG IN", isLoading = false) {
+            TaskyActionButton(text = stringResource(R.string.log_in), isLoading = false) {
 
             }
         }

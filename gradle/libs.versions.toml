@@ -19,6 +19,8 @@ composeCompiler = "1.5.9"
 koin = "3.5.3"
 ktor = "2.3.8"
 ktorClientLogging = "2.3.8"
+navigationCompose = "2.7.7"
+timber = "5.0.1"
 
 # Project versions
 projectApplicationId = "com.gharseldin.tasky"
@@ -31,6 +33,7 @@ uiAndroid = "1.6.8"
 lifecycleRuntimeAndroid = "2.8.3"
 material3Android = "1.2.1"
 uiTooling = "1.6.8"
+navigationRuntimeKtx = "2.7.7"
 
 
 [libraries]
@@ -71,6 +74,8 @@ ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktorClientLogging" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+
 # Gradle
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 android-tools-common = { group = "com.android.tools", name = "common", version.ref = "androidTools" }
@@ -81,6 +86,7 @@ androidx-ui-android = { group = "androidx.compose.ui", name = "ui-android", vers
 androidx-lifecycle-runtime-android = { group = "androidx.lifecycle", name = "lifecycle-runtime-android", version.ref = "lifecycleRuntimeAndroid" }
 androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
 ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "uiTooling" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

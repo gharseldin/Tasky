@@ -3,4 +3,14 @@
     <string name="dont_have_an_account">DON\'T HAVE AN ACCOUNT?</string>
     <string name="sign_up">SIGN UP</string>
     <string name="welcome_back">Welcome Back!</string>
+    <string name="create_your_account">Create your account"</string>
+    <string name="name">Name</string>
+    <string name="password">Password</string>
+    <string name="email_address">Email address</string>
+    <string name="password_is_at_least_9_characters_long">Password is at least 9 characters long</string>
+    <string name="password_must_contain_a_digit">Password must contain a digit</string>
+    <string name="password_must_contain_a_lowercase_letter">Password must contain a lowercase letter</string>
+    <string name="password_must_contain_an_uppercase_letter">Password must contain an uppercase letter</string>
+    <string name="get_started">GET STARTED</string>
+    <string name="log_in">LOG IN</string>
 </resources>

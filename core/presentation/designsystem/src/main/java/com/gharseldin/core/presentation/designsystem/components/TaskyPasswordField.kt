@@ -20,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -37,6 +38,7 @@ import com.gharseldin.core.presentation.designsystem.TaskyTheme
 fun TaskyPasswordField(
     state: TextFieldState,
     isPasswordVisible: Boolean,
+    onPasswordFieldFocusChange: (Boolean) -> Unit,
     onTogglePasswordVisibility: () -> Unit,
     hint: String,
     modifier: Modifier = Modifier
@@ -52,12 +54,13 @@ fun TaskyPasswordField(
             color = TaskyDarkGray
         ),
         keyboardType = KeyboardType.Password,
-        cursorBrush = SolidColor(MaterialTheme.colorScheme.onBackground),
+        cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
         modifier = Modifier
             .clip(RoundedCornerShape(10.dp))
             .background(TaskyLight2)
 //            .padding(vertical = 16.dp)
-            .padding(start = 20.dp),
+            .padding(start = 20.dp)
+            .onFocusChanged { onPasswordFieldFocusChange(it.isFocused) },
         decorator = { container ->
             Row(
                 modifier = Modifier
@@ -107,6 +110,7 @@ private fun TaskyPasswordFieldPreview() {
         TaskyPasswordField(
             state = rememberTextFieldState(),
             isPasswordVisible = false,
+            onPasswordFieldFocusChange = {},
             hint = "email",
             onTogglePasswordVisibility = {}
         )
