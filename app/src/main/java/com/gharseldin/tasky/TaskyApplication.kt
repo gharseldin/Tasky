@@ -3,6 +3,7 @@ package com.gharseldin.tasky
 import android.app.Application
 import com.gharseldin.authentication.data.di.authDataModule
 import com.gharseldin.authentication.presentation.di.authViewModelModule
+import com.gharseldin.core.data.di.coreDataModule
 import com.gharseldin.tasky.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -23,7 +24,8 @@ class TaskyApplication : Application() {
             modules(
                 appModule,
                 authViewModelModule,
-                authDataModule
+                authDataModule,
+                coreDataModule,
             )
         }
     }

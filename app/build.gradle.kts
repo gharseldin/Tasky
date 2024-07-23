@@ -46,6 +46,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     implementation(projects.core.presentation.designsystem)
+    implementation(projects.core.data)
     implementation(projects.authentication.presentation)
     implementation(projects.authentication.domain)
     implementation(projects.authentication.data)

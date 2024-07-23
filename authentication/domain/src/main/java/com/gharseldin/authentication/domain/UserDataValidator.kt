@@ -8,12 +8,12 @@ class UserDataValidator(
         hasMinLength = countCharacters(name) >= MINIMUM_NAME_LENGTH,
         hasMaxLength = countCharacters(name) <= MAXIMUM_NAME_LENGTH,
         isNotEmpty = name.trim().isNotEmpty(),
-        isCharactersOnly = !name.any { !it.isLetter() }
+        isCharactersOnly = name.all { it.isLetter() || it.isWhitespace() }
     )
 
     private fun countCharacters(text: String): Int {
         var count = 0
-        for (c in text) if (!c.isLetter()) count++
+        for (c in text) if (c.isLetter()) count++
         return count
     }
 
