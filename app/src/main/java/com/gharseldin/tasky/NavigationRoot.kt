@@ -34,7 +34,7 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
         composable(route = "registration") {
             RegistrationScreenRoot(
                 onBackClicked = { },
-                onGetStartedClicked = { navController.navigate("registration") }
+                onSuccessfulRegistration = { navController.navigate("registration") }
             )
         }
     }

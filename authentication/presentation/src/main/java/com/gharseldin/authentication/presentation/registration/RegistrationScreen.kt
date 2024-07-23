@@ -1,5 +1,6 @@
 package com.gharseldin.authentication.presentation.registration
 
+import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -18,6 +19,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,27 +34,46 @@ import com.gharseldin.core.presentation.designsystem.TaskyTheme
 import com.gharseldin.core.presentation.designsystem.components.TaskyActionButton
 import com.gharseldin.core.presentation.designsystem.components.TaskyPasswordField
 import com.gharseldin.core.presentation.designsystem.components.TaskyTextField
+import com.gharseldin.core.presentation.ui.ObserveAsEvents
 import com.gharseldin.core.presentation.ui.UiText
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun RegistrationScreenRoot(
     onBackClicked: () -> Unit,
-    onGetStartedClicked: () -> Unit,
+    onSuccessfulRegistration: () -> Unit,
     registrationScreenViewModel: RegistrationScreenViewModel = koinViewModel()
 ) {
-    RegistrationScreen(
-        state = registrationScreenViewModel.state
-    ) { action ->
-        when (action) {
-            RegistrationAction.OnBackClicked -> onBackClicked()
-            RegistrationAction.OnGetStartedClicked -> TODO()
-            RegistrationAction.OnTogglePasswordVisibilityClicked -> TODO()
-            is RegistrationAction.onPasswordFieldFocusChange -> {
-                registrationScreenViewModel.passwordFieldFocusChanged(action.isFocused)
+    val context = LocalContext.current
+    val keyboardController = LocalSoftwareKeyboardController.current
+
+    ObserveAsEvents(registrationScreenViewModel.events) { event ->
+        when (event) {
+            is RegistrationEvent.Error -> {
+                keyboardController?.hide()
+                Toast.makeText(
+                    context,
+                    event.error.asString(context),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+
+            RegistrationEvent.RegistrationSuccess -> {
+                keyboardController?.hide()
+                Toast.makeText(
+                    context,
+                    "Registration successful, you can log in now",
+                    Toast.LENGTH_LONG
+                ).show()
+                onSuccessfulRegistration()
             }
         }
     }
+
+    RegistrationScreen(
+        state = registrationScreenViewModel.state,
+        onAction = registrationScreenViewModel::onAction
+    )
 }
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -138,7 +160,12 @@ private fun RegistrationScreen(
                 PasswordValidationBlock(state = state.passwordValidationState)
             }
             Spacer(modifier = Modifier.height(24.dp))
-            TaskyActionButton(text = stringResource(R.string.get_started), isLoading = false) {
+            TaskyActionButton(
+                text = stringResource(R.string.get_started),
+                enabled = state.canRegister,
+                isLoading = false
+            ) {
+                onAction(RegistrationAction.OnGetStartedClicked)
             }
         }
     }
